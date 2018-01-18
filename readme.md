@@ -1,6 +1,6 @@
 # Laravel Release Cycle Graph
 
-![laravel-rc](screenshot.png)
+![laravel-rc](screenshot-v1.png)
 
 ## Installation
 
