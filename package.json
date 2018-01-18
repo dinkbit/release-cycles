@@ -8,8 +8,7 @@
     "start": "NODE_ENV=production next start"
   },
   "dependencies": {
-    "lodash": "^4.17.4",
-    "moment": "^2.20.1",
+    "date-fns": "^1.29.0",
     "next": "^4.2.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
