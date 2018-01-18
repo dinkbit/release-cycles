@@ -1,12 +1,4 @@
 import React, { Component } from "react";
-import moment from "moment";
-
-import map from "lodash/map";
-import flatten from "lodash/flatten";
-import filter from "lodash/filter";
-import min from "lodash/min";
-import max from "lodash/max";
-
 import {
   XAxis,
   YAxis,
@@ -16,29 +8,33 @@ import {
   Scatter
 } from "recharts";
 
+import format from "date-fns/format";
+import isDate from "date-fns/is_date";
+import addYears from "date-fns/add_years";
+import min from "date-fns/min";
+import max from "date-fns/max";
+
 import Stage from "../components/Stage";
 import data from "../data";
 
 const getYears = (startDate, endDate) => {
   const dates = [];
-  const stopDate = moment(endDate);
-  let currentDate = moment(startDate);
+  let currentDate = startDate;
 
-  while (currentDate <= stopDate) {
-    const m = moment(currentDate);
-    dates.push(m.unix());
-    currentDate = m.add(1, "years");
+  while (currentDate <= endDate) {
+    dates.push(parseInt(format(currentDate, 'X'), 10));
+    currentDate = addYears(currentDate, 1);
   }
 
   return dates;
 }
 
 // Get all releases dates
-const dates = flatten(data.map(release => filter(release, v => moment.isMoment(v))));
+const dates = Array.prototype.concat(...data.map(r => Object.values(r).filter(v => isDate(v))));
 
 // Configure X ticks
-const ticksX = getYears(min(dates), max(dates));
-const tickFormatterX = tick => moment(tick, "X").format("YYYY");
+const ticksX = getYears(min(...dates), max(...dates));
+const tickFormatterX = tick => format(new Date(tick * 1000), "YYYY");
 
 // Configure Y ticks
 const ticksY = data.map((release, index) => index + 1);
@@ -80,8 +76,8 @@ export default () => (
           key={`release-${release.version}`}
           name={release.version}
           data={[
-            { x: release.releaseStart.unix(), y: index + 1 },
-            { x: release.releaseEnd.unix(), y: index + 1 }
+            { x: format(release.releaseStart, 'X'), y: index + 1 },
+            { x: format(release.releaseEnd, 'X'), y: index + 1 }
           ]}
           fill="#f4645f"
           line={{ strokeWidth: 20 }}
@@ -94,11 +90,11 @@ export default () => (
           name={release.version}
           data={[
             {
-              x: release.bugsStart ? release.bugsStart.unix() : null,
+              x: release.bugsStart ? format(release.bugsStart, 'X') : null,
               y: index + 1
             },
             {
-              x: release.bugsEnd ? release.bugsEnd.unix() : null,
+              x: release.bugsEnd ? format(release.bugsEnd, 'X') : null,
               y: index + 1
             }
           ]}
@@ -113,11 +109,11 @@ export default () => (
           name={release.version}
           data={[
             {
-              x: release.securityStart ? release.securityStart.unix() : null,
+              x: release.securityStart ? format(release.securityStart, 'X') : null,
               y: index + 1
             },
             {
-              x: release.securityEnd ? release.securityEnd.unix() : null,
+              x: release.securityEnd ? format(release.securityEnd, 'X') : null,
               y: index + 1
             }
           ]}
