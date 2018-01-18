@@ -1,11 +1,11 @@
 {
-  "name": "laravel-release-cycle",
+  "name": "laravel-rc",
   "version": "1.0.0",
-  "description": "Laravel Release Cycle",
+  "description": "Laravel Release Cycle Graph",
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "NODE_ENV=production next start"
   },
   "dependencies": {
     "lodash": "^4.17.4",
