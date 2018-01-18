@@ -22,15 +22,17 @@ const getYears = (startDate, endDate) => {
   let currentDate = startDate;
 
   while (currentDate <= endDate) {
-    dates.push(parseInt(format(currentDate, 'X'), 10));
+    dates.push(parseInt(format(currentDate, "X"), 10));
     currentDate = addYears(currentDate, 1);
   }
 
   return dates;
-}
+};
 
 // Get all releases dates
-const dates = Array.prototype.concat(...data.map(r => Object.values(r).filter(v => isDate(v))));
+const dates = Array.prototype.concat(
+  ...data.map(r => Object.values(r).filter(v => isDate(v)))
+);
 
 // Configure X ticks
 const ticksX = getYears(min(...dates), max(...dates));
@@ -76,8 +78,8 @@ export default () => (
           key={`release-${release.version}`}
           name={release.version}
           data={[
-            { x: format(release.releaseStart, 'X'), y: index + 1 },
-            { x: format(release.releaseEnd, 'X'), y: index + 1 }
+            { x: format(release.releaseStart, "X"), y: index + 1 },
+            { x: format(release.releaseEnd, "X"), y: index + 1 }
           ]}
           fill="#f4645f"
           line={{ strokeWidth: 20 }}
@@ -90,11 +92,11 @@ export default () => (
           name={release.version}
           data={[
             {
-              x: release.bugsStart ? format(release.bugsStart, 'X') : null,
+              x: release.bugsStart ? format(release.bugsStart, "X") : null,
               y: index + 1
             },
             {
-              x: release.bugsEnd ? format(release.bugsEnd, 'X') : null,
+              x: release.bugsEnd ? format(release.bugsEnd, "X") : null,
               y: index + 1
             }
           ]}
@@ -109,11 +111,13 @@ export default () => (
           name={release.version}
           data={[
             {
-              x: release.securityStart ? format(release.securityStart, 'X') : null,
+              x: release.securityStart
+                ? format(release.securityStart, "X")
+                : null,
               y: index + 1
             },
             {
-              x: release.securityEnd ? format(release.securityEnd, 'X') : null,
+              x: release.securityEnd ? format(release.securityEnd, "X") : null,
               y: index + 1
             }
           ]}

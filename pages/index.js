@@ -1,4 +1,5 @@
 import Chart from "../components/Chart";
+import Links from "../components/Links";
 
 export default () => (
   <div className="container">
@@ -9,14 +10,7 @@ export default () => (
       <div className="card-chart">
         <Chart />
       </div>
-      <small>
-        <a
-          href="https://laravel-news.com/laravel-release-process"
-          target="_blank"
-        >
-          Source
-        </a>
-      </small>
+      <Links />
     </div>
     <style jsx global>{`
       html,
@@ -48,16 +42,6 @@ export default () => (
     <style jsx>{`
       h2 {
         font-size: 16px;
-      }
-
-      small {
-        text-align: center;
-        margin: 20px;
-      }
-
-      a {
-        text-decoration: none;
-        color: rgb(6, 125, 247);
       }
 
       .container {
