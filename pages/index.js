@@ -1,12 +1,7 @@
-import Head from "next/head";
 import Chart from "../components/Chart";
 
 export default () => (
   <div className="container">
-    <Head>
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <meta charSet="utf-8" />
-    </Head>
     <div className="card">
       <div className="card-header">
         <h2>Laravel Release Cycle</h2>
