@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import moment from "moment";
-import _ from "lodash";
+
+import map from "lodash/map";
+import flatten from "lodash/flatten";
+import filter from "lodash/filter";
+import min from "lodash/min";
+import max from "lodash/max";
+
 import {
   XAxis,
   YAxis,
@@ -13,26 +19,25 @@ import {
 import Stage from "../components/Stage";
 import data from "../data";
 
-function getDates(startDate, stopDate) {
-  const dateArray = [];
-  var currentDate = moment(startDate);
-  var stopDate = moment(stopDate);
+const getYears = (startDate, endDate) => {
+  const dates = [];
+  const stopDate = moment(endDate);
+  let currentDate = moment(startDate);
 
   while (currentDate <= stopDate) {
     const m = moment(currentDate);
-    dateArray.push(m.unix());
-    currentDate = moment(currentDate).add(1, "years");
+    dates.push(m.unix());
+    currentDate = m.add(1, "years");
   }
 
-  return dateArray;
+  return dates;
 }
 
-const dates = _.chain(data)
-  .map(release => _.filter(release, v => moment.isMoment(v)))
-  .flatten();
+// Get all releases dates
+const dates = flatten(data.map(release => filter(release, v => moment.isMoment(v))));
 
 // Configure X ticks
-const ticksX = getDates(dates.min().value(), dates.max().value());
+const ticksX = getYears(min(dates), max(dates));
 const tickFormatterX = tick => moment(tick, "X").format("YYYY");
 
 // Configure Y ticks
