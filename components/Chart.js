@@ -50,7 +50,7 @@ export default class Chart extends Component {
         <ScatterChart
           width={640}
           height={400}
-          margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+          margin={{ top: 30, right: 20, bottom: 20, left: 20 }}
         >
           <XAxis
             type="number"
@@ -66,7 +66,7 @@ export default class Chart extends Component {
           <YAxis
             dataKey={"y"}
             name="Releases"
-            domain={["dataMin - 1", "dataMax + 1"]}
+            domain={["dataMin - 0.5", "dataMax"]}
             ticks={ticksY}
             ticksSize={ticksY.length}
             tickFormatter={tickFormatterY}
