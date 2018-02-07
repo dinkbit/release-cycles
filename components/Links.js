@@ -2,18 +2,15 @@ export default () => (
   <div className="links">
     <small>
       <a
-        href="https://laravel-news.com/laravel-release-process"
+        href="https://github.com/dinkbit/release-cycles/issues/new"
         target="_blank"
       >
-        Source
+        feedback
       </a>
     </small>
     <small>
-      <a
-        href="https://github.com/dinkbit/laravel-rc"
-        target="_blank"
-      >
-        Github
+      <a href="https://github.com/dinkbit/release-cycles" target="_blank">
+        source
       </a>
     </small>
     <style jsx>{`
